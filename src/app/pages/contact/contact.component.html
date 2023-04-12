@@ -1,0 +1,56 @@
+<div class="container mt-5 mb-5">
+    <h1>Contact</h1>
+        <form #contactForm="ngForm" (ngSubmit)="getcontactFormData(contactForm.value)" class="col-lg-8">
+            <div class="row">
+                <div class="col-lg-6 mt-2 mb-2">
+                    <input type="text" class="form-control" name="fname" placeholder="Enter First Name" ngModel>
+                </div>
+                <div class="col-lg-6 mt-2 mb-2">
+                    <input type="text " class="form-control" name="lname" placeholder="Enter Last Name" ngModel>
+                </div>
+                <div class="col-lg-12 mt-2 mb-2">
+                    <input type="text " class="form-control" name="email" placeholder="Enter Email ID" ngModel>
+                </div>
+                <div class="col-lg-12 mt-2 mb-2">
+                    <input type="text " class="form-control" name="mobile" placeholder="Enter Mobile" ngModel>
+                </div>
+                <div class="col-lg-12 mt-2">
+                    <button class="btn btn-md btn-dark" type="submit">Submit</button>
+                </div>
+            </div>
+        </form>
+        <div class="contact-display-area mt-4 ">
+            <h3>All Contacts</h3>
+            <table class="table bg-warning" id="contacts">
+                <tr>
+                    <th>#</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th></th>
+                </tr>
+                <tr *ngIf="allContacts.length < 1 && !isFetching">
+                    <td col span="5">No Contacts available</td>
+                </tr>
+                <tr *ngIf="isFetching">
+                    <td col span="5">Loading....</td>
+                </tr>
+                <tr *ngFor="let cont of allContacts; index as i">
+                    <td>{{i + 1}}</td>
+                    <td>{{cont.fname}}</td>
+                    <td>{{cont.lname}}</td>
+                    <td>{{cont.email}}</td>
+                    <td>{{cont.mobile}}</td>
+                    <td><button class="btn-delete mt-2 mb-2" (click)="onDeleteContact(cont.id)">Delete</button></td>
+                </tr>
+
+            </table>
+            <div class="col-lg-12 mt-2">
+                <button class="btn btn-md btn-dark" type="submit" value="Fetch Product" (click)="onContactsFetch()">Fetch Contact</button>
+            </div>
+            <div class="col-lg-12 mt-2">    
+                <button class="btn btn-md btn-dark" (click)="onDeleteAllContacts()">Clear All Contacts</button>
+            </div>
+            
+</div>
